@@ -9,4 +9,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Run
-        run: docker compose up --no-build
+        run: docker compose build otelcol && docker compose up --no-build

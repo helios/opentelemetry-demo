@@ -19,6 +19,11 @@ exporters:
   logging:
   prometheus:
     endpoint: "otelcol:9464"
+  otlphttp:
+    endpoint: "https://collector.heliosphere.io"
+    traces_endpoint: "https://collector.heliosphere.io/traces"
+    headers:
+      Authorization: "27ffbd45c6943160c03f"
 
 
 processors:
@@ -31,7 +36,7 @@ service:
     traces:
       receivers: [otlp]
       processors: [spanmetrics, batch]
-      exporters: [logging, jaeger]
+      exporters: [logging, jaeger, otlphttp]
     metrics:
       receivers: [otlp]
       processors: [batch]
