@@ -1,0 +1,14 @@
+name: "Run OpenTelemetry demo"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run
+        run: docker compose up
+        env:
+          HS_TOKEN: "${{ secrets.DEMO_HS_TOKEN }}"

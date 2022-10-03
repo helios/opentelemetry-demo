@@ -27,4 +27,5 @@ RUN python -m pip install grpcio-tools
 RUN python -m grpc_tools.protoc -I=./proto/ --python_out=./ --grpc_python_out=./ ./proto/demo.proto
 
 EXPOSE ${RECOMMENDATION_SERVICE_PORT}
+ENV PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
 ENTRYPOINT [ "opentelemetry-instrument", "python", "recommendation_server.py" ]
