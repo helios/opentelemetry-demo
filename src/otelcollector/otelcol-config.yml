@@ -23,7 +23,7 @@ exporters:
     endpoint: "https://collector.heliosphere.io"
     traces_endpoint: "https://collector.heliosphere.io/traces"
     headers:
-      Authorization: "27ffbd45c6943160c03f"
+      Authorization: "DEMO_HS_TOKEN"
 
 
 processors:
