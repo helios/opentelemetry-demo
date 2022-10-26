@@ -23,6 +23,11 @@ exporters:
     resource_to_telemetry_conversion:
       enabled: true
     enable_open_metrics: true
+  otlphttp:
+    endpoint: "https://collector.heliosphere.io"
+    traces_endpoint: "https://collector.heliosphere.io/traces"
+    headers:
+      Authorization: "DEMO_HS_TOKEN"
 
 processors:
   batch:
@@ -46,7 +51,7 @@ service:
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [otlp, logging, spanmetrics]
+      exporters: [otlp, logging, spanmetrics, otlphttp]
     metrics:
       receivers: [otlp, spanmetrics]
       processors: [filter, transform, batch]
