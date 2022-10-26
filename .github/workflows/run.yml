@@ -1,0 +1,24 @@
+name: "Run OpenTelemetry demo"
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */4 * * *" # Run every 4 hours, at :00 sharp.
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run
+        run: sed -i "s/DEMO_HS_TOKEN/${DEMO_HS_TOKEN}/" './src/otelcollector/otelcol-config.yml' && docker compose build otelcol && docker compose up -d --no-build
+        env:
+          DEMO_HS_TOKEN: ${{ secrets.DEMO_HS_TOKEN }}
+
+      - name: Sleep for 5 minutes
+        uses: juliangruber/sleep-action@v1
+        with:
+          time: 5m
+
+      - name: Stop docker
+        run: docker compose stop loadgenerator && sleep 30 && docker compose down
