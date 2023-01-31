@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Run
-        run: sed -i "s/DEMO_HS_TOKEN/${DEMO_HS_TOKEN}/" './src/otelcollector/otelcol-config.yml' && docker compose build otelcol && docker compose up -d --no-build
+        run: sed -i "s/DEMO_HS_TOKEN/${DEMO_HS_TOKEN}/" './src/otelcollector/otelcol-config.yml' && docker compose build otelcol frontend && docker compose up -d --no-build
         env:
           DEMO_HS_TOKEN: ${{ secrets.DEMO_HS_TOKEN }}
 
