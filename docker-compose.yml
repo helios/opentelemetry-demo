@@ -344,38 +344,38 @@ services:
     depends_on:
       - frontend
       - featureflagservice
-      - loadgenerator
+      # - loadgenerator
       - grafana
 
   # Load Generator
-  loadgenerator:
-    image: ${IMAGE_NAME}:${IMAGE_VERSION}-loadgenerator
-    container_name: load-generator
-    build:
-      context: ./
-      dockerfile: ./src/loadgenerator/Dockerfile
-      cache_from:
-        - ${IMAGE_NAME}:${IMAGE_VERSION}-loadgenerator
-    deploy:
-      resources:
-        limits:
-          memory: 120M
-    restart: unless-stopped
-    ports:
-      - "${LOCUST_WEB_PORT}"
-    environment:
-      - LOCUST_WEB_PORT
-      - LOCUST_USERS
-      - LOCUST_HOST
-      - LOCUST_HEADLESS
-      - LOCUST_AUTOSTART
-      - OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=http://${OTEL_COLLECTOR_HOST}:4318/v1/traces
-      - OTEL_RESOURCE_ATTRIBUTES
-      - OTEL_SERVICE_NAME=loadgenerator
-      - PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
-    depends_on:
-      - frontend
-    logging: *logging
+  # loadgenerator:
+  #   image: ${IMAGE_NAME}:${IMAGE_VERSION}-loadgenerator
+  #   container_name: load-generator
+  #   build:
+  #     context: ./
+  #     dockerfile: ./src/loadgenerator/Dockerfile
+  #     cache_from:
+  #       - ${IMAGE_NAME}:${IMAGE_VERSION}-loadgenerator
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         memory: 120M
+  #   restart: unless-stopped
+  #   ports:
+  #     - "${LOCUST_WEB_PORT}"
+  #   environment:
+  #     - LOCUST_WEB_PORT
+  #     - LOCUST_USERS
+  #     - LOCUST_HOST
+  #     - LOCUST_HEADLESS
+  #     - LOCUST_AUTOSTART
+  #     - OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=http://${OTEL_COLLECTOR_HOST}:4318/v1/traces
+  #     - OTEL_RESOURCE_ATTRIBUTES
+  #     - OTEL_SERVICE_NAME=loadgenerator
+  #     - PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
+  #   depends_on:
+  #     - frontend
+  #   logging: *logging
 
   # Payment service
   paymentservice:
