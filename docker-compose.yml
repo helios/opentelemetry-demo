@@ -226,6 +226,7 @@ services:
         limits:
           memory: 200M
     restart: unless-stopped
+    platform: linux/arm64/v8
     ports:
       - "${FEATURE_FLAG_SERVICE_PORT}"                                  # Feature Flag Service UI
       - "${FEATURE_FLAG_GRPC_SERVICE_PORT}"                             # Feature Flag Service gRPC API
